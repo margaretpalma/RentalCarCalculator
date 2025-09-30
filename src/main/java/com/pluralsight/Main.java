@@ -37,10 +37,23 @@ public class Main {
         scanner.nextLine();         //clears CRLF
 
         //what needs to be calculated?
-        double basicCarRentalAmount = 0;
-        double optionsAmount = 0;
+
+        //per day value is this block
+        double basicCarRentalAmount = numberOfDays * priceOfBasicCarRentalPerDay;
+        double optionPerDayCumulative = (optionTollTag) ? priceOfOptionTollTag : 0;
+        optionPerDayCumulative += (optionGPS) ? priceofOptionGPS : 0;
+        optionPerDayCumulative += (optionRoadsideAssistance) ? priceofOptionRoadsideAssistance  : 0;
+
+        double optionsAmount = optionPerDayCumulative * numberOfDays;
+
         double underageSurcharge = 0;
-        double totalCost = 0;
+        if (age < userageLimit) {
+            underageSurcharge = basicCarRentalAmount * percentSurchargeForUnderage;
+        } else {
+            underageSurcharge = 0;
+        }
+
+        double totalCost = basicCarRentalAmount + optionsAmount + underageSurcharge;
 
         //display the results
         System.out.println("Quote for rental: " );
