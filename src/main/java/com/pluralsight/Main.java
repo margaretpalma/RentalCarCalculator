@@ -4,62 +4,66 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+        System.out.println("Hello world!");
         Scanner scanner = new Scanner(System.in);
 
-        //what are my known values?
+        //known value
         double priceOfBasicCarRentalPerDay = 29.99;
         double priceOfOptionTollTag = 3.95;
-        double priceofOptionGPS = 2.95;
-        double priceofOptionRoadsideAssistance = 3.95;
-        float  percentSurchargeForUnderage = 0.30f;
-        int userageLimit = 25;
-
-
-        //what values do i need to get from the user?
-        System.out.print("What is the pickup date? ");
+        double priceOfOptionGPS = 2.95;
+        double priceOfOptionRoadsideAssistance = 3.95;
+        float percentSurchargeForUnderage = 0.30f;
+        int userAgeLimit = 25;
+        //user value
+        System.out.print("When do you want to rent the car?: ");
         String pickupDate = scanner.nextLine();
 
-        System.out.print("How many days? ");
+
+        System.out.print("How many days do you need it?: ");
         int numberOfDays = scanner.nextInt();
-        scanner.nextLine();                //clears the CRLF
+        scanner.nextLine();
 
-        System.out.print("Do you want toll tag? Y/N ");
-        boolean optionTollTag = scanner.nextLine().equalsIgnoreCase("y");  //.equalsIgnoreCase
+        System.out.print("Do you want a toll tag (Y/N): ");
+        boolean optionTollTag = scanner.nextLine().equalsIgnoreCase("y");
 
-        System.out.print("Do you want GPS? Y/N ");
-        boolean optionGPS = scanner.nextLine().equalsIgnoreCase("y");  //.equalsIgnoreCase
+        System.out.print("Do you want a GPS (Y/N): ");
+        boolean optionGPS = scanner.nextLine().equalsIgnoreCase("y");
 
-        System.out.print("Do you want roadside Assistance? Y/N ");
-        boolean optionRoadsideAssistance = scanner.nextLine().equalsIgnoreCase("y");  //.equalsIgnoreCase
+        System.out.print("Do you want Roadside Assistance (Y/N): ");
+        boolean optionsRoadsideAssistance = scanner.nextLine().equalsIgnoreCase("y");
 
-        System.out.print("How old are you? ");
+        System.out.print("How old are you?: ");
         int age = scanner.nextInt();
-        scanner.nextLine();         //clears CRLF
+        scanner.nextLine();
+
 
         //what needs to be calculated?
 
-        //per day value is this block
-        double basicCarRentalAmount = numberOfDays * priceOfBasicCarRentalPerDay;
+        double basicCarRentalAmount = numberOfDays * priceOfBasicCarRentalPerDay ;
+
         double optionPerDayCumulative = (optionTollTag) ? priceOfOptionTollTag : 0;
-        optionPerDayCumulative += (optionGPS) ? priceofOptionGPS : 0;
-        optionPerDayCumulative += (optionRoadsideAssistance) ? priceofOptionRoadsideAssistance  : 0;
+        optionPerDayCumulative += (optionGPS) ? priceOfOptionGPS : 0;
+        optionPerDayCumulative += (optionsRoadsideAssistance) ? priceOfOptionRoadsideAssistance : 0;
 
         double optionsAmount = optionPerDayCumulative * numberOfDays;
 
         double underageSurcharge = 0;
-        if (age < userageLimit) {
+
+        if (age < userAgeLimit){
             underageSurcharge = basicCarRentalAmount * percentSurchargeForUnderage;
-        } else {
-            underageSurcharge = 0;
         }
 
         double totalCost = basicCarRentalAmount + optionsAmount + underageSurcharge;
 
-        //display the results
-        System.out.println("Quote for rental: " );
-        System.out.printf("Basic Car Rental:    $%.2f\n", basicCarRentalAmount);
-        System.out.printf("Options:             $%.2f\n", optionsAmount);
-        System.out.printf("Underage Surcharge:  $%.2f\n", underageSurcharge);
-        System.out.printf("Total:               $%.2f\n", totalCost);
+
+        //display the results.
+        System.out.println("Here is the quote for your rental:");
+        System.out.printf("Basic Car Rental:    $%.2f\n",basicCarRentalAmount);
+        System.out.printf("Options:             $%.2f\n",optionsAmount);
+        System.out.printf("Underage Surcharge:  $%.2f\n",underageSurcharge);
+        System.out.printf("Total:               $%.2f\n",totalCost);
+
+
+
     }
 }
